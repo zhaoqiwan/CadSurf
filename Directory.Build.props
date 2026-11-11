@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '18.0' and '$(ForceImportBeforeCppProps)' == ''">
+    <ForceImportBeforeCppProps>$(MSBuildThisFileDirectory)CadSurf.Toolset.props</ForceImportBeforeCppProps>
+  </PropertyGroup>
+</Project>

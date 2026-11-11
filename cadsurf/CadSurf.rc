@@ -1,0 +1,871 @@
+﻿// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LIGHT DIALOGEX 0, 0, 275, 144
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,154,119,50,14
+    PUSHBUTTON      "取消",IDCANCEL,214,119,50,14
+    CONTROL         "",IDC_SLIDERS,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,22,100,84,15
+    LTEXT           "Shine",IDC_STATIC,10,89,18,8
+    CONTROL         "",IDC_SLIDERE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,146,23,100,15
+    CONTROL         "",IDC_SLIDERC,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,146,42,100,15
+    LTEXT           "Spot",IDC_STATIC,138,12,16,8
+    LTEXT           "Exponent",IDC_STATIC,118,27,32,8
+    LTEXT           "Angle",IDC_STATIC,125,46,19,8
+    GROUPBOX        "POSITION",IDC_STATIC,10,10,104,75
+    CONTROL         "",IDC_SLIDERX,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,21,18,87,15
+    CONTROL         "",IDC_SLIDERY,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,21,34,87,15
+    CONTROL         "",IDC_SLIDERZ,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,21,51,87,15
+    CONTROL         "",IDC_SLIDERW,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,21,67,87,15
+    LTEXT           "X",IDC_STATIC,16,23,9,8
+    LTEXT           "Y",IDC_STATIC,16,39,8,8
+    LTEXT           "Z",IDC_STATIC,16,54,8,8
+    LTEXT           "W",IDC_STATIC,15,70,8,8
+    LISTBOX         IDC_LISTlight,124,66,37,46,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "New Light",IDC_BUTTONnew,178,66,50,14
+    PUSHBUTTON      "Delete",IDC_BUTTONdelete,179,81,50,14
+    PUSHBUTTON      "Modify",IDC_BUTTONmodify,179,98,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_LIGHT, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 264
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 133
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 英语(美国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 182, 302
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "                      About CadSurf"
+FONT 10, "??", 400, 0, 0x0
+BEGIN
+    CONTROL         143,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | WS_BORDER,6,2,171,132,WS_EX_DLGMODALFRAME
+    DEFPUSHBUTTON   "OK",IDOK,7,276,168,20,WS_GROUP
+    EDITTEXT        IDC_EDIT1,7,139,168,116,ES_MULTILINE | ES_READONLY | WS_VSCROLL
+    LTEXT           "2016?CG?????",IDC_STATIC,7,263,140,10
+END
+
+IDD_MATLDLG DIALOGEX 0, 0, 142, 151
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "                    Materials Dialog"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,19,133,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,75,133,50,14
+    CONTROL         "Aluminium",IDC_ALUM,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,5,3,43,18
+    CONTROL         "Brass",IDC_BRASS,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,49,3,43,18
+    CONTROL         "P Bronze",IDC_PBRONZE,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,5,21,43,18
+    CONTROL         "Chrome",IDC_CHROME,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,49,57,43,18
+    CONTROL         "P Copper",IDC_PCOPPER,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,93,21,43,18
+    CONTROL         "Gold",IDC_GOLD,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,5,39,43,18
+    CONTROL         "Pewter",IDC_PEWTER,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,5,111,43,18
+    CONTROL         "Silver",IDC_SILVER,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,93,39,43,18
+    CONTROL         "Steel",IDC_STEEL,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,93,57,43,18
+    CONTROL         "Emerald",IDC_EMERALD,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,5,75,43,18
+    CONTROL         "Obsidian",IDC_OBSIDIAN,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,93,75,43,18
+    CONTROL         "Pearl",IDC_PEARL,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,49,93,43,18
+    CONTROL         "Turquoise",IDC_TURQUOISE,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,93,93,43,18
+    CONTROL         "Plastic",IDC_BPLASTIC,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,93,111,43,18
+    CONTROL         "Bronze",IDC_BRONZE,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,93,3,43,18
+    CONTROL         "Copper",IDC_COPPER,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,49,21,43,18
+    CONTROL         "P Gold",IDC_PGOLD,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,49,39,43,18
+    CONTROL         "P Silver",IDC_PSILVER,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,5,57,43,18
+    CONTROL         "Jade",IDC_JADE,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,49,75,43,18
+    CONTROL         "Ruby",IDC_RUBY,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,5,93,43,18
+    CONTROL         "Rubber",IDC_BRUBBER,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | BS_MULTILINE | BS_FLAT,49,111,43,18
+END
+
+IDD_GRID DIALOG 0, 0, 124, 145
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Grid Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,10,123,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,65,123,45,14
+    CTEXT           "Grid Size",IDC_STATIC,11,7,37,16,SS_CENTERIMAGE
+    CTEXT           "DX",IDC_STATIC,15,56,25,16,SS_CENTERIMAGE
+    CTEXT           "Grid Step",IDC_STATIC,11,25,37,16,SS_CENTERIMAGE
+    CTEXT           "DY",IDC_STATIC,15,75,25,16,SS_CENTERIMAGE
+    CTEXT           "DZ",IDC_STATIC,15,95,25,16,SS_CENTERIMAGE
+    GROUPBOX        "Grid Plane Normal",IDC_STATIC,11,44,100,75
+    EDITTEXT        IDC_EDIT1,51,7,61,16,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,101,7,11,15
+    EDITTEXT        IDC_EDIT2,51,26,61,16,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPIN2,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,101,26,11,15
+    EDITTEXT        IDC_EDIT3,44,56,61,16,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPIN3,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,94,56,11,16
+    EDITTEXT        IDC_EDIT4,44,75,61,16,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPIN4,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,94,75,11,16
+    EDITTEXT        IDC_EDIT5,44,95,61,16,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPIN5,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,94,95,11,16
+END
+
+IDD_STL_MOVE DIALOGEX 0, 0, 182, 106
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Move Selected STL"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Offset along world axes",IDC_STATIC,12,10,155,10
+    LTEXT           "X:",IDC_STATIC,12,29,40,10
+    EDITTEXT        IDC_STL_X,57,26,113,14,ES_AUTOHSCROLL
+    LTEXT           "Y:",IDC_STATIC,12,47,40,10
+    EDITTEXT        IDC_STL_Y,57,44,113,14,ES_AUTOHSCROLL
+    LTEXT           "Z:",IDC_STATIC,12,65,40,10
+    EDITTEXT        IDC_STL_Z,57,62,113,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,63,84,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,120,84,50,14
+END
+
+IDD_STL_ROTATE DIALOGEX 0, 0, 203, 118
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rotate Selected STL"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Angle (degrees):",IDC_STATIC,12,13,78,10
+    EDITTEXT        IDC_STL_VALUE,92,10,99,14,ES_AUTOHSCROLL
+    GROUPBOX        "Axis",IDC_STATIC,12,31,179,55
+    CONTROL         "X",IDC_STL_AXIS_X,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,20,44,28,10
+    CONTROL         "Y",IDC_STL_AXIS_Y,"Button",BS_AUTORADIOBUTTON,54,44,28,10
+    CONTROL         "Z",IDC_STL_AXIS_Z,"Button",BS_AUTORADIOBUTTON,88,44,28,10
+    CONTROL         "Pick line",IDC_STL_AXIS_LINE,"Button",BS_AUTORADIOBUTTON,122,44,63,10
+    LTEXT           "X/Y/Z use the displayed world axes through the origin.",IDC_STATIC,20,61,166,18
+    DEFPUSHBUTTON   "OK",IDOK,84,96,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,141,96,50,14
+END
+
+IDD_STL_SCALE DIALOGEX 0, 0, 182, 75
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Scale Selected STL"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Scale factor:",IDC_STATIC,12,14,69,10
+    EDITTEXT        IDC_STL_VALUE,83,11,87,14,ES_AUTOHSCROLL
+    LTEXT           "Uniform scale about the selection center.",IDC_STATIC,12,32,158,10
+    DEFPUSHBUTTON   "OK",IDOK,63,53,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,120,53,50,14
+END
+
+CG_IDD_MYDIALOGBAR DIALOG 0, 0, 96, 200
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 175
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 295
+    END
+
+    IDD_MATLDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 135
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 144
+    END
+
+    IDD_GRID, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 117
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 138
+    END
+
+    "CG_IDD_MYDIALOGBAR", DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\CadSurf.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\CadSurf.ico"
+IDR_CADSURTYPE          ICON                    "res\\CadSurfDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+IDR_TB_GEOM             BITMAP                  "res\\tb_geom.bmp"
+IDR_CHILDFRAME          BITMAP                  "res\\toolbar1.bmp"
+IDR_TB_TRN              BITMAP                  "res\\bmp00001.bmp"
+IDB_SPLASH              BITMAP                  "res\\new_splash.bmp"
+IDB_SMALLSPLASH         BITMAP                  "res\\new_splash_small.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT_PREVIEW
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_TB_GEOM TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_POINTS
+    BUTTON      ID_LINES
+    BUTTON      ID_CIRCLES
+    BUTTON      ID_ELLIPSE
+    BUTTON      ID_PARABOLA
+    BUTTON      ID_HYPERBOLA
+    SEPARATOR
+    BUTTON      ID_BEZIER
+    BUTTON      ID_BSPLINE
+    BUTTON      ID_HELIX
+    BUTTON      ID_OFFSETCURVE
+    SEPARATOR
+    BUTTON      ID_PLANE
+    BUTTON      ID_CYLINDER
+    BUTTON      ID_CONE
+    BUTTON      ID_SPHERE
+    BUTTON      ID_TORUS
+    SEPARATOR
+    BUTTON      ID_EXTSURF
+    BUTTON      ID_REVSURF
+    BUTTON      ID_RULEDSURF
+    BUTTON      ID_PIPE
+    BUTTON      ID_OFFSETSURFACE
+    BUTTON      ID_USERSURFACE
+END
+
+IDR_CHILDFRAME TOOLBAR 18, 18
+BEGIN
+    BUTTON      ID_TOPVIEW
+    BUTTON      ID_BOTTOMVIEW
+    BUTTON      ID_FRONTVIEW
+    BUTTON      ID_BACKVIEW
+    BUTTON      ID_LEFTVIEW
+    BUTTON      ID_RIGHTVIEW
+    BUTTON      ID_AXONVIEW
+    SEPARATOR
+    BUTTON      ID_PROJECTION_TYPE
+    SEPARATOR
+    BUTTON      ID_MULTIFOUR
+    SEPARATOR
+    BUTTON      ID_FITALL
+    BUTTON      ID_ZOOMWIN
+    SEPARATOR
+    BUTTON      ID_RESETVIEW
+    SEPARATOR
+    BUTTON      ID_DISPLAYMODE
+    BUTTON      ID_HLREMOVED
+    BUTTON      ID_ANTIALIAS
+    SEPARATOR
+    BUTTON      ID_SNAPSHOT
+END
+
+IDR_TB_TRN TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_TRANSLATE
+    BUTTON      ID_ROTATE
+    BUTTON      ID_SCALE
+    BUTTON      ID_REFLECT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "Help And &About CadSurf...",  ID_APP_ABOUT
+    END
+END
+
+IDR_CADSURTYPE MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "Import STL...",                ID_FILE_IMPORT_STL
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Delete All",                 ID_EDIT_DELETEALL
+        MENUITEM "Delete Selected",             ID_EDIT_DELETESELECTED
+        MENUITEM SEPARATOR
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM "&Redo\tCtrl+Y",               ID_EDIT_REDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "Display All",                 ID_VIEW_DISPLAYALL
+        MENUITEM "Display Selected",            ID_VIEW_DISPLAYSELECTED
+        MENUITEM "Erase All",                   ID_VIEW_ERASEALL
+        MENUITEM "Erase Selected",              ID_VIEW_ERASESELECTED
+        MENUITEM SEPARATOR
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "Preferences"
+    BEGIN
+        POPUP "DisplayMode"
+        BEGIN
+            MENUITEM "Shaded",                      ID_PREFERENCES_DISPLAYMODE_SHADED
+            MENUITEM "Wireframe",                   ID_PREFERENCES_DISPLAYMODE_WIREFRAME
+            MENUITEM "HL Removed",                  ID_HLREMOVED
+        END
+        MENUITEM "Color",                       ID_PREFERENCES_COLOR
+        MENUITEM "Light",                       ID_PREFERENCES_LIGHT
+        MENUITEM "Material",                    ID_PREFERENCES_MATERIAL
+        POPUP "Line Style"
+        BEGIN
+            MENUITEM "Solid",                       ID_PREFERENCES_LINESTYLE_SOLID
+            MENUITEM "Dotted",                      ID_PREFERENCES_LINESTYLE_DOTTED
+            MENUITEM "Dashed",                      ID_PREFERENCES_LINESTYLE_DASHED
+            MENUITEM "Dashed-dotted",               ID_PREFERENCES_LINESTYLE_DASHEDDOTTED
+        END
+        MENUITEM SEPARATOR
+        POPUP "Grid"
+        BEGIN
+            MENUITEM "ON",                          ID_PREFERENCES_GRID_ON
+            MENUITEM "Settings",                    ID_PREFERENCES_GRID_SETTINGS
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Background Color",            ID_PREFERENCES_BACKGROUNDCOLOR
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "Sketch"
+    BEGIN
+        POPUP "SketchPlane"
+        BEGIN
+            MENUITEM "XOY",                         ID_SKETCH_XOY, CHECKED
+            MENUITEM "XOZ",                         ID_SKETCH_XOZ
+            MENUITEM "YOZ",                         ID_SKETCH_YOZ
+            MENUITEM "CloseSketch",                 ID_SKETCH_CLOSE
+        END
+        MENUITEM "Line",                        ID_SKECH_LINE, CHECKED
+        MENUITEM "Circle",                      ID_SKECH_CIRCLE
+    END
+    POPUP "STL"
+    BEGIN
+        POPUP "&Move"
+        BEGIN
+            MENUITEM "By &Offset...",               ID_STL_MOVE
+            MENUITEM "&Point to Point",             ID_STL_MOVE_BY_POINTS
+        END
+        MENUITEM "&Rotate...",                  ID_STL_ROTATE
+        MENUITEM "&Scale...",                   ID_STL_SCALE
+        MENUITEM SEPARATOR
+        MENUITEM "Auto &Arrange on XOY",        ID_STL_AUTO_ARRANGE
+        POPUP "&View"
+        BEGIN
+            POPUP "&Axis Views"
+            BEGIN
+                MENUITEM "&X Direction (+X / -X)",    ID_STL_VIEW_X
+                MENUITEM "&Y Direction (+Y / -Y)",    ID_STL_VIEW_Y
+                MENUITEM "&Z Direction (+Z / -Z)",    ID_STL_VIEW_Z
+            END
+            POPUP "&Isometric Views"
+            BEGIN
+                MENUITEM "&NE Isometric",             ID_STL_VIEW_NE_ISO
+                MENUITEM "N&W Isometric",             ID_STL_VIEW_NW_ISO
+                MENUITEM "&SE Isometric",             ID_STL_VIEW_SE_ISO
+                MENUITEM "S&W Isometric",             ID_STL_VIEW_SW_ISO
+            END
+        END
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "Help And &About CadSurf...",  ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "A",            ID_AXONVIEW,            VIRTKEY, CONTROL, NOINVERT
+    "B",            ID_BOTTOMVIEW,          VIRTKEY, CONTROL, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_FRONTVIEW,           VIRTKEY, CONTROL, NOINVERT
+    "H",            ID_HLREMOVED,           VIRTKEY, CONTROL, NOINVERT
+    "L",            ID_LEFTVIEW,            VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "R",            ID_BACKVIEW,            VIRTKEY, CONTROL, NOINVERT
+    "R",            ID_RIGHTVIEW,           VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_TOPVIEW,             VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F2,          ID_FITALL,              VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_HOME,        ID_RESETVIEW,           VIRTKEY, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Y",            ID_EDIT_REDO,           VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,0
+ PRODUCTVERSION 2,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "N .Sharjith"
+            VALUE "FileDescription", "CadSurf MFC Application"
+            VALUE "FileVersion", "2, 0, 0, 0"
+            VALUE "InternalName", "CadSurf"
+            VALUE "LegalCopyright", "Copyright (C) 2002 - 2003 N. Sharjith"
+            VALUE "OriginalFilename", "CadSurf.EXE"
+            VALUE "ProductName", "CadSurf Application"
+            VALUE "ProductVersion", "2, 0, 0, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_COORD      "Coord"
+    ID_INDICATOR_DATE       "Date"
+    IDP_SOCKETS_INIT_FAILED "Windows sockets initialization failed."
+    ID_INDICATOR_TIME       "Time"
+END
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "CadSurf 2.0"
+    IDR_CADSURTYPE          "\nCadSur\nCSurf\n\n.srf\nCadSurf.Document\nCadSurf Document"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "CadSurf"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_IMPORT_STL      "Import a binary STL mesh into the current document"
+    ID_STL_MOVE             "Move the selected STL parts by a numeric offset"
+    ID_STL_MOVE_BY_POINTS   "Move the selected STL parts from one reference point to another"
+    ID_STL_ROTATE           "Rotate the selected STL parts around an axis"
+    ID_STL_SCALE            "Scale the selected STL parts uniformly"
+    ID_STL_AUTO_ARRANGE     "Arrange all displayed STL parts along X on the XOY plane"
+    ID_STL_VIEW_X           "View along the world X axis; repeat to reverse direction"
+    ID_STL_VIEW_Y           "View along the world Y axis; repeat to reverse direction"
+    ID_STL_VIEW_Z           "View along the world Z axis; repeat to reverse direction"
+    ID_STL_VIEW_NE_ISO      "Display the northeast isometric view"
+    ID_STL_VIEW_NW_ISO      "Display the northwest isometric view"
+    ID_STL_VIEW_SE_ISO      "Display the southeast isometric view"
+    ID_STL_VIEW_SW_ISO      "Display the southwest isometric view"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE
+BEGIN
+    ID_POINTS               "Create Points\nPoints"
+    ID_LINES                "Create Lines\nLines"
+    ID_CIRCLES              "Create Circles\nCircles"
+    ID_ELLIPSE              "Create Ellipse\nEllipse"
+    ID_PARABOLA             "Create Parabola\nParabola"
+    ID_HYPERBOLA            "Create Hyperbola\nHyperbola"
+    ID_BEZIER               "Create Bezier Curve\nBezier Curve"
+    ID_BSPLINE              "Create B-Spline Curve\nB-Spline Curve"
+    ID_EXTSURF              "Create Extruded Surface\nExtruded Surface"
+END
+
+STRINGTABLE
+BEGIN
+    ID_REVSURF              "Create Revolved Surface\nRevolved Surface"
+    ID_RULEDSURF            "Create Ruled Surface\nRuled Surface"
+    ID_TOPVIEW              "Display The Top View\nTop 'Ctrl+T'"
+    ID_BOTTOMVIEW           "Display The Bottom View\nBottom 'Ctrl+B'"
+    ID_FRONTVIEW            "Display The Front View\nFront 'Ctrl+F'"
+    ID_BACKVIEW             "Display The Rear View\nRear 'Ctrl+R'"
+    ID_LEFTVIEW             "Display The Left View\nLeft 'Ctrl+L'"
+    ID_RIGHTVIEW            "Display The Right View\nRight 'Ctrl+Shift+R'"
+    ID_AXONVIEW             "Display The Axonometric View\nAxon 'Ctrl+A'"
+    ID_FITALL               "Fits The View To The Screen\nFit All 'F2'"
+    ID_ZOONWIN              "Zooms The View Defined By A Window\nZoom Window"
+    ID_RESETVIEW            "Resets The View\nReset 'Home'"
+    ID_ZOOMWIN              "Zooms The View Defined By A Window\nWindow Zoom"
+    ID_PLANE                "Create A Plane \nPlane"
+    ID_CYLINDER             "Create A Cylinderical Surface\nCylinder"
+END
+
+STRINGTABLE
+BEGIN
+    ID_CONE                 "Create A Conical Surface\nCone"
+    ID_SPHERE               "Create A Spherical Surface\nSphere"
+    ID_TORUS                "Create A Toroidal Surface\nTorus"
+    ID_PIPE                 "Create A Pipe Surface\nPipe"
+    ID_TRANSLATE            "Translation\nTranslate"
+    ID_ROTATE               "Rotation\nRotate"
+    ID_SCALE                "Scaling\nScale"
+    ID_REFLECT              "Reflection(Mirroring)\nReflect"
+    ID_DISPLAYMODE          "Toggle Display Mode\nToggle Display Mode"
+    ID_EDIT_DELETEALL       "Deletes All The Objects In The Display Context;"
+    ID_VIEW_DISPLAYALL      "Display All Objects In Context"
+    ID_VIEW_ERASEALL        "Erase All Objects In Context"
+    ID_PREFERENCES_DISPLAYMODE_SHADED "Display Objects In Shaded Mode"
+    ID_PREFERENCES_DISPLAYMODE_WIREFRAME "Display Objects In Wireframe Mode"
+    ID_PREFERENCES_MATERIAL "Set The Material Of The Selected Object"
+    ID_VIEW_DISPLAYSELECTED "Displays Only Selected Object(s)"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_ERASESELECTED   "Erases Only Selected Object(s)"
+    ID_PREFERENCES_COLOR    "Set The Color Of The Selected Object"
+    ID_PREFERENCES_BACKGROUNDCOLOR "Change The Background Color"
+    ID_EDIT_DELETESELECTED  "Delete The Selected Object From Context"
+    ID_HLREMOVED            "Display Hidden Line Removed\nHidden Line Removal 'Ctrl+H'"
+    ID_PREFERENCES_DISPLAYMODE_HLREMOVED "Display Hidden Line Removed"
+    ID_ANTIALIAS            "Toggle Aliasing Mode\nToggle Aliasing"
+    ID_PREFERENCES_LINESTYLE_SOLID "Set Line Style Of Selected Curve To Solid"
+    ID_PREFERENCES_LINESTYLE_DOTTED 
+                            "Set Line Style Of Selected Curve To Dotted"
+    ID_PREFERENCES_LINESTYLE_DASHED 
+                            "Set Line Style Of Selected Curve To Dashed"
+    ID_PREFERENCES_LINESTYLE_DASHEDDOTTED 
+                            "Set Line Style Of Selected Curve To Alternate Dashed-Dotted"
+    ID_MULTIFOUR            "Toggles Single Or 4 Views - viz Top, Front, Left And Axonometric\nToggle Multiple 4"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SNAPSHOT             "Create A Snap Shot Of The Current View\nSnap Shot"
+    ID_HELIX                "Create Helix\nHelix"
+    ID_OFFSETSURFACE        "Create Offset Surface\nOffset Surface"
+    ID_OFFSETCURVE          "Create Offset Curve\nOffset Curve"
+    ID_PROJECTION_TYPE      "Toggles Orthographis and Perspective Projections\nToggles Orthographis and Perspective Projections"
+    ID_BUTTON32840          "Create User Defined Surface\nUser Surface"
+    ID_USERSURFACE          "Create User Defined Surface\nUser Defined Surface"
+END
+
+#endif    // 英语(美国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\CadSurf.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

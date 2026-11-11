@@ -1,0 +1,33 @@
+# Include source, Visual Studio project files and required resources only.
+*
+!*/
+!.gitignore
+!*.cpp
+!*.Cpp
+!*.CPP
+!*.h
+!*.H
+!*.rc
+!*.rc2
+!*.ico
+!*.ICO
+!*.bmp
+!*.sln
+!*.vcxproj
+!*.vcxproj.filters
+!*.props
+!*.txt
+!/cadsurf/glut32.lib
+/cadsurf/res/untitled.bmp
+
+# Build outputs and per-user Visual Studio state.
+.vs/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+ipch/
+
+# Model files are kept locally.
+*.stl
+*.STL

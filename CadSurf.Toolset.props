@@ -1,0 +1,11 @@
+<Project>
+  <!-- VS 2026 can run MSVC 14.44 through its v145 targets when the v143 targets are absent. -->
+  <PropertyGroup Condition="'$(PlatformToolset)' == 'v143'
+                        and !Exists('$(VCTargetsPath)\Platforms\$(Platform)\PlatformToolsets\v143\Toolset.props')
+                        and Exists('$(VsInstallRoot)\VC\Auxiliary\Build\14.44.17.14\Microsoft.VCToolsVersion.14.44.17.14.props')">
+    <PlatformToolset>v145</PlatformToolset>
+    <_CadSurfUseV143Compiler>true</_CadSurfUseV143Compiler>
+  </PropertyGroup>
+  <Import Project="$(VsInstallRoot)\VC\Auxiliary\Build\Microsoft.VCToolsVersion.v143.default.props"
+          Condition="'$(_CadSurfUseV143Compiler)' == 'true' and '$(VCToolsVersion)' == ''" />
+</Project>
