@@ -312,6 +312,7 @@ void CCadSurfDoc::OnEditUndo()
     if (undoStack.empty())
         return;
 
+    redoStack.reserve(redoStack.size() + 1);
     StlHistoryCommand command = std::move(undoStack.back());
     undoStack.pop_back();
     bool restored = false;
@@ -319,7 +320,7 @@ void CCadSurfDoc::OnEditUndo()
     {
         restored = RestoreStlStates(command.before);
     }
-    else
+    else if (command.kind == StlHistoryKind::Import)
     {
         CGLObject* detached = dContext->DetachDisplayed(command.importedObjectId);
         if (detached)
@@ -328,11 +329,15 @@ void CCadSurfDoc::OnEditUndo()
             restored = true;
         }
     }
+    else
+    {
+        restored = dContext->RestoreFromHistory(command.removedObjects);
+    }
 
     if (!restored)
     {
         undoStack.push_back(std::move(command));
-        AfxMessageBox(_T("Undo could not find one of the STL parts used by this action."),
+        AfxMessageBox(_T("Undo could not restore this action. Check that its objects still exist and memory is available."),
                       MB_ICONWARNING);
         return;
     }
@@ -349,6 +354,7 @@ void CCadSurfDoc::OnEditRedo()
     if (redoStack.empty())
         return;
 
+    undoStack.reserve(undoStack.size() + 1);
     StlHistoryCommand command = std::move(redoStack.back());
     redoStack.pop_back();
     bool restored = false;
@@ -356,16 +362,20 @@ void CCadSurfDoc::OnEditRedo()
     {
         restored = RestoreStlStates(command.after);
     }
-    else if (command.detachedObject)
+    else if (command.kind == StlHistoryKind::Import && command.detachedObject)
     {
         dContext->Append(command.detachedObject.release());
         restored = true;
+    }
+    else if (command.kind == StlHistoryKind::Delete)
+    {
+        restored = dContext->DetachForHistory(command.removedObjects);
     }
 
     if (!restored)
     {
         redoStack.push_back(std::move(command));
-        AfxMessageBox(_T("Redo could not restore one of the STL parts used by this action."),
+        AfxMessageBox(_T("Redo could not restore this action. Check that its objects still exist and memory is available."),
                       MB_ICONWARNING);
         return;
     }
@@ -1722,12 +1732,29 @@ void CCadSurfDoc::OnReflect()
 	delete myFont1; delete myFont2; delete myFont3; delete myFont4;
 }
 
+void CCadSurfDoc::DeleteWithHistory(bool all)
+{
+    StlHistoryCommand command;
+    command.kind = StlHistoryKind::Delete;
+    command.name = all ? _T("Delete All") : _T("Delete Selected");
+    command.removedObjects = dContext->CollectForDeletion(all);
+    if (command.removedObjects.empty())
+        return;
+
+    // Allocate history storage before detaching objects from the document.
+    undoStack.reserve(undoStack.size() + 1);
+    if (!dContext->DetachForHistory(command.removedObjects))
+    {
+        AfxMessageBox(_T("The selected objects could not be deleted."), MB_ICONWARNING);
+        return;
+    }
+    PushStlHistory(std::move(command));
+    UpdateAllViews(nullptr);
+}
+
 void CCadSurfDoc::OnEditDeleteall() 
 {
-	// TODO: Add your command handler code here
-	undoStack.clear();
-	redoStack.clear();
-	dContext->DeleteAll();	
+	DeleteWithHistory(true);
 }
 
 void CCadSurfDoc::OnUpdateEditDeleteall(CCmdUI* pCmdUI) 
@@ -1738,12 +1765,7 @@ void CCadSurfDoc::OnUpdateEditDeleteall(CCmdUI* pCmdUI)
 
 void CCadSurfDoc::OnEditDeleteselected() 
 {
-	// TODO: Add your command handler code here
-	// Deletion history is intentionally outside the first STL undo/redo scope.
-	// Drop transform/import history so it never refers to a deleted object.
-	undoStack.clear();
-	redoStack.clear();
-	dContext->DeleteSelected();
+	DeleteWithHistory(false);
 }
 
 void CCadSurfDoc::OnUpdateEditDeleteselected(CCmdUI* pCmdUI) 

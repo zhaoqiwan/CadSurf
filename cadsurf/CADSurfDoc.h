@@ -127,7 +127,7 @@ public:
 	afx_msg void OnEditDeleteselected();
 
 private:
-	enum class StlHistoryKind { Transform, Import };
+	enum class StlHistoryKind { Transform, Import, Delete };
 	struct StlHistoryCommand
 	{
 		StlHistoryCommand() = default;
@@ -142,9 +142,11 @@ private:
 		std::vector<StlObjectState> after;
 		unsigned long importedObjectId = 0;
 		std::unique_ptr<CGLObject> detachedObject;
+		std::vector<RemovedObject> removedObjects;
 	};
 
 	bool RestoreStlStates(const std::vector<StlObjectState>& states);
+	void DeleteWithHistory(bool all);
 	void PushStlHistory(StlHistoryCommand command);
 	void RefreshAfterHistory();
 	void SetHistoryStatus(LPCTSTR verb, LPCTSTR name);

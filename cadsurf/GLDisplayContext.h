@@ -35,10 +35,20 @@
 #include "GLObject.h"
 #include "BoundingBox.h"
 #include "Point3D.h"
+#include <memory>
 #include <vector>
 #include "GLView.h"
 
 class CGLView;
+
+struct RemovedObject
+{
+	unsigned long id = 0;
+	CGLObject* identity = nullptr;
+	std::size_t index = 0;
+	bool erased = false;
+	std::unique_ptr<CGLObject> object;
+};
 
 class CGLDisplayContext  
 {
@@ -73,6 +83,9 @@ public:
 	CGLObject* CurrentSelected() const;
 	CGLObject* FindDisplayed(unsigned long id) const;
 	CGLObject* DetachDisplayed(unsigned long id);
+	std::vector<RemovedObject> CollectForDeletion(bool all) const;
+	bool DetachForHistory(std::vector<RemovedObject>& objects);
+	bool RestoreFromHistory(std::vector<RemovedObject>& objects);
 	std::vector<CGLObject*> DisplayedObjectsOfType(GLObjectType type) const;
 	bool GetStraightLine(unsigned long id, CPoint3D& start, CPoint3D& end) const;
 	std::vector<CPoint3D> ReferencePoints() const;

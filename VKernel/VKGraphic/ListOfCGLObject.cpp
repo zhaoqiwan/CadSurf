@@ -64,6 +64,28 @@ void CListOfCGLObject::Prepend( CGLObject* data)
 	}
 }
 
+void CListOfCGLObject::InsertAt(CGLObject* data, std::size_t index)
+{
+	if (index == 0 || IsEmpty())
+	{
+		Prepend(data);
+		return;
+	}
+
+	CListNodeOfCGLObject* previous = firstPtr;
+	while (index > 1 && previous->nextPtr)
+	{
+		previous = previous->nextPtr;
+		--index;
+	}
+
+	CListNodeOfCGLObject* node = new CListNodeOfCGLObject(data);
+	node->nextPtr = previous->nextPtr;
+	previous->nextPtr = node;
+	if (!node->nextPtr)
+		lastPtr = node;
+}
+
 CGLObject* CListOfCGLObject::First() const
 {
 	if(IsEmpty())

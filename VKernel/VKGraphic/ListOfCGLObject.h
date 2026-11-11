@@ -29,6 +29,7 @@
 #include "VKGraphic.h"
 
 #include "ListNodeOfCGLObject.h"
+#include <cstddef>
 
 class CGLObject;
 class CListIteratorOfListOfCGLObject;
@@ -41,6 +42,7 @@ public:
 	virtual ~CListOfCGLObject();
 	void Append(CGLObject*);
 	void Prepend(CGLObject*);
+	void InsertAt(CGLObject*, std::size_t index);
 	CGLObject* First() const;
 	CGLObject* Last() const;
 	CListNodeOfCGLObject* Previous(const CGLObject*);

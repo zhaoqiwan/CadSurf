@@ -4,6 +4,7 @@
 
 #include "stdafx.h"
 #include "Line3D.h"
+#include <algorithm>
 #include <memory>
 #include "CadSurf.h"
 #include "GLDisplayContext.h"
@@ -405,6 +406,118 @@ CGLObject* CGLDisplayContext::DetachDisplayed(unsigned long id)
     CGLObject* detached = display->Remove(object);
     RecomputeBounds();
     return detached;
+}
+
+std::vector<RemovedObject> CGLDisplayContext::CollectForDeletion(bool all) const
+{
+    std::vector<RemovedObject> result;
+    CListOfCGLObject* lists[] = {display, erase};
+    for (int listIndex = 0; listIndex < (all ? 2 : 1); ++listIndex)
+    {
+        CListIteratorOfListOfCGLObject objects(lists[listIndex]);
+        std::size_t index = 0;
+        for (objects.Init(); objects.More(); objects.Next(), ++index)
+        {
+            CGLObject* object = objects.Current();
+            if (object && (all || IsSelected(object)))
+            {
+                RemovedObject entry;
+                entry.id = object->GetObjID();
+                entry.identity = object;
+                entry.index = index;
+                entry.erased = listIndex == 1;
+                result.push_back(std::move(entry));
+            }
+        }
+    }
+    return result;
+}
+
+bool CGLDisplayContext::DetachForHistory(std::vector<RemovedObject>& objects)
+{
+    struct LocatedObject
+    {
+        CGLObject* object;
+        CListOfCGLObject* list;
+        std::size_t index;
+        bool erased;
+    };
+    std::vector<LocatedObject> located;
+    located.reserve(objects.size());
+    for (const RemovedObject& entry : objects)
+    {
+        if (entry.object)
+            return false;
+
+        bool found = false;
+        CListOfCGLObject* lists[] = {display, erase};
+        for (int listIndex = 0; listIndex < 2 && !found; ++listIndex)
+        {
+            CListIteratorOfListOfCGLObject iterator(lists[listIndex]);
+            std::size_t index = 0;
+            for (iterator.Init(); iterator.More(); iterator.Next(), ++index)
+            {
+                CGLObject* object = iterator.Current();
+                if (object == entry.identity && object->GetObjID() == entry.id)
+                {
+                    located.push_back({object, lists[listIndex], index, listIndex == 1});
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if (!found)
+            return false;
+    }
+
+    EmptySelection();
+    for (std::size_t i = 0; i < objects.size(); ++i)
+    {
+        objects[i].index = located[i].index;
+        objects[i].erased = located[i].erased;
+        objects[i].object.reset(located[i].list->Remove(located[i].object));
+    }
+    RecomputeBounds();
+    return true;
+}
+
+bool CGLDisplayContext::RestoreFromHistory(std::vector<RemovedObject>& objects)
+{
+    for (const RemovedObject& entry : objects)
+        if (!entry.object || entry.object.get() != entry.identity)
+            return false;
+
+    std::sort(objects.begin(), objects.end(),
+        [](const RemovedObject& left, const RemovedObject& right)
+        {
+            return left.erased == right.erased ? left.index < right.index
+                                               : left.erased < right.erased;
+        });
+    try
+    {
+        for (RemovedObject& entry : objects)
+        {
+            CListOfCGLObject* list = entry.erased ? erase : display;
+            list->InsertAt(entry.object.get(), entry.index);
+            entry.object.release();
+        }
+    }
+    catch (const std::bad_alloc&)
+    {
+        // Restore ownership if allocating a list node fails mid-operation.
+        for (RemovedObject& entry : objects)
+        {
+            if (!entry.object)
+            {
+                CListOfCGLObject* list = entry.erased ? erase : display;
+                entry.object.reset(list->Remove(entry.identity));
+            }
+        }
+        RecomputeBounds();
+        return false;
+    }
+    RecomputeBounds();
+    return true;
 }
 
 std::vector<CGLObject*> CGLDisplayContext::DisplayedObjectsOfType(GLObjectType type) const
