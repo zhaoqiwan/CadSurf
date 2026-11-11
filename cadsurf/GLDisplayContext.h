@@ -62,7 +62,8 @@ public:
 	void DisplaySelected();
 	void EraseAll();
 	void EraseSelected();
-	void Append(CGLObject*);
+	void Append(CGLObject*, bool erased = false);
+	void SwapObjects(CGLDisplayContext& other);
 	void Remove(CGLObject*);
 	void DeleteAll();
 	void DeleteSelected();
@@ -86,7 +87,7 @@ public:
 	std::vector<RemovedObject> CollectForDeletion(bool all) const;
 	bool DetachForHistory(std::vector<RemovedObject>& objects);
 	bool RestoreFromHistory(std::vector<RemovedObject>& objects);
-	std::vector<CGLObject*> DisplayedObjectsOfType(GLObjectType type) const;
+	std::vector<CGLObject*> ObjectsOfType(GLObjectType type, bool erased = false) const;
 	bool GetStraightLine(unsigned long id, CPoint3D& start, CPoint3D& end) const;
 	std::vector<CPoint3D> ReferencePoints() const;
 	void RecomputeBounds();

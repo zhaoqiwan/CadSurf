@@ -628,7 +628,7 @@ END
 STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "CadSurf 2.0"
-    IDR_CADSURTYPE          "\nCadSur\nCSurf\n\n.srf\nCadSurf.Document\nCadSurf Document"
+    IDR_CADSURTYPE          "\nCadSur\nCSurf\nCadSurf Layout (*.srf)\n.srf\nCadSurf.Document\nCadSurf Document"
 END
 
 STRINGTABLE

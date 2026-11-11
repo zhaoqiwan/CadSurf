@@ -40,6 +40,20 @@ CGLObject* CGLStlMesh::Copy() const
     return copy;
 }
 
+void CGLStlMesh::SetColor(const GLubyte& red, const GLubyte& green, const GLubyte& blue)
+{
+    itsRed = red;
+    itsGreen = green;
+    itsBlue = blue;
+}
+
+void CGLStlMesh::GetColor(GLubyte* color) const
+{
+    color[0] = itsRed;
+    color[1] = itsGreen;
+    color[2] = itsBlue;
+}
+
 bool CGLStlMesh::PrepareTransform(const StlTransform& change, StlTransform& result,
                                   CBoundingBox& bounds) const
 {

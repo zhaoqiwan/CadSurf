@@ -48,17 +48,32 @@ CGLDisplayContext::~CGLDisplayContext()
 	delete select;
 }
 
-void CGLDisplayContext::Append(CGLObject* aO)
+void CGLDisplayContext::Append(CGLObject* aO, bool erased)
 {
 	if(aO == NULL)
 		return;
 
-	if(display->IsEmpty())
+	if (erased)
+	{
+		erase->Append(aO);
+		return;
+	}
+
+	const bool first = display->IsEmpty();
+	display->Append(aO);
+	if(first)
 		viewBox = aO->GetBoundingBox();
 	else
 		viewBox.AddBox(aO->GetBoundingBox());
+}
 
-	display->Append(aO);
+void CGLDisplayContext::SwapObjects(CGLDisplayContext& other)
+{
+	EmptySelection();
+	other.EmptySelection();
+	std::swap(display, other.display);
+	std::swap(erase, other.erase);
+	std::swap(viewBox, other.viewBox);
 }
 
 void CGLDisplayContext::Remove(CGLObject* pGlObj)
@@ -520,10 +535,10 @@ bool CGLDisplayContext::RestoreFromHistory(std::vector<RemovedObject>& objects)
     return true;
 }
 
-std::vector<CGLObject*> CGLDisplayContext::DisplayedObjectsOfType(GLObjectType type) const
+std::vector<CGLObject*> CGLDisplayContext::ObjectsOfType(GLObjectType type, bool erased) const
 {
     std::vector<CGLObject*> result;
-    CListIteratorOfListOfCGLObject objects(display);
+    CListIteratorOfListOfCGLObject objects(erased ? erase : display);
     for (objects.Init(); objects.More(); objects.Next())
     {
         CGLObject* object = objects.Current();

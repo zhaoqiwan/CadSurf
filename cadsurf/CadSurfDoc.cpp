@@ -8,8 +8,11 @@
 #include "GLStlMesh.h"
 
 #include <algorithm>
+#include <cstring>
 #include <fstream>
+#include <limits>
 #include <new>
+#include <type_traits>
 #include <utility>
 
 #ifdef _DEBUG
@@ -77,15 +80,12 @@ CCadSurfDoc::~CCadSurfDoc()
 	delete dContext;
 }
 
-BOOL CCadSurfDoc::OnNewDocument()
+void CCadSurfDoc::DeleteContents()
 {
-	if (!CDocument::OnNewDocument())
-		return FALSE;
-
+	dContext->DeleteAll();
 	undoStack.clear();
 	redoStack.clear();
-
-	return TRUE;
+	CDocument::DeleteContents();
 }
 
 
@@ -93,17 +93,144 @@ BOOL CCadSurfDoc::OnNewDocument()
 /////////////////////////////////////////////////////////////////////////////
 // CCadSurfDoc serialization
 
+namespace
+{
+constexpr char LayoutSignature[] = "CADSRFST";
+constexpr DWORD LayoutVersion = 1;
+constexpr UINT PartMetadataSize = 4; // hidden flag, red, green, blue
+constexpr UINT TransformSize = 16 * sizeof(double);
+constexpr UINT TriangleSize = 12 * sizeof(float);
+constexpr UINT MinimumPartSize = PartMetadataSize + TransformSize + sizeof(DWORD) + TriangleSize;
+
+static_assert(sizeof(StlTriangle) == TriangleSize &&
+              std::is_trivially_copyable<StlTriangle>::value,
+              "Layout triangles must contain twelve contiguous floats");
+
+void ReadLayoutBytes(CArchive& archive, ULONGLONG& remaining, void* destination, UINT size)
+{
+    if (remaining < size || archive.Read(destination, size) != size)
+        AfxThrowArchiveException(CArchiveException::endOfFile);
+    remaining -= size;
+}
+
+void WriteLayoutPart(CArchive& archive, const CGLStlMesh& object, bool hidden)
+{
+    BYTE metadata[PartMetadataSize] = {};
+    metadata[0] = hidden ? 1 : 0;
+    object.GetColor(metadata + 1);
+    archive.Write(metadata, sizeof(metadata));
+
+    const StlTransform transform = object.GetTransform();
+    archive.Write(transform.matrix.data(), TransformSize);
+
+    const auto& triangles = object.GetMesh().triangles;
+    if (triangles.empty() || triangles.size() > (std::numeric_limits<DWORD>::max)())
+        AfxThrowArchiveException(CArchiveException::badSchema);
+    const auto triangleCount = static_cast<DWORD>(triangles.size());
+    archive.Write(&triangleCount, sizeof(triangleCount));
+    for (const StlTriangle& triangle : triangles)
+        archive.Write(&triangle, TriangleSize);
+}
+
+void ReadLayoutPart(CArchive& archive, ULONGLONG& remaining, CGLDisplayContext& scene)
+{
+    BYTE metadata[PartMetadataSize];
+    StlTransform transform;
+    DWORD triangleCount;
+    ReadLayoutBytes(archive, remaining, metadata, sizeof(metadata));
+    ReadLayoutBytes(archive, remaining, transform.matrix.data(), TransformSize);
+    ReadLayoutBytes(archive, remaining, &triangleCount, sizeof(triangleCount));
+
+    const auto& matrix = transform.matrix;
+    if (metadata[0] > 1 || matrix[3] != 0 || matrix[7] != 0 || matrix[11] != 0 || matrix[15] != 1 ||
+        triangleCount == 0 || triangleCount > remaining / TriangleSize)
+        AfxThrowArchiveException(CArchiveException::badSchema);
+
+    auto mesh = std::make_shared<StlMesh>();
+    mesh->minimum.fill((std::numeric_limits<float>::max)());
+    mesh->maximum.fill((std::numeric_limits<float>::lowest)());
+    if (triangleCount > mesh->triangles.max_size())
+        AfxThrowArchiveException(CArchiveException::badSchema);
+    mesh->triangles.reserve(triangleCount);
+    for (DWORD i = 0; i < triangleCount; ++i)
+    {
+        StlTriangle triangle;
+        ReadLayoutBytes(archive, remaining, &triangle, TriangleSize);
+        for (float coordinate : triangle.normal)
+            if (!std::isfinite(coordinate))
+                AfxThrowArchiveException(CArchiveException::badSchema);
+
+        for (const StlVertex& vertex : triangle.vertices)
+        {
+            for (std::size_t axis = 0; axis < vertex.size(); ++axis)
+            {
+                const float coordinate = vertex[axis];
+                if (!std::isfinite(coordinate))
+                    AfxThrowArchiveException(CArchiveException::badSchema);
+                mesh->minimum[axis] = (std::min)(mesh->minimum[axis], coordinate);
+                mesh->maximum[axis] = (std::max)(mesh->maximum[axis], coordinate);
+            }
+        }
+        mesh->triangles.push_back(triangle);
+    }
+
+    auto object = std::make_unique<CGLStlMesh>(std::move(mesh));
+    StlTransform placement;
+    CBoundingBox bounds;
+    if (!object->PrepareTransform(transform, placement, bounds))
+        AfxThrowArchiveException(CArchiveException::badSchema);
+    object->SetTransform(placement, bounds);
+    object->SetColor(metadata[1], metadata[2], metadata[3]);
+    scene.Append(object.get(), metadata[0] != 0);
+    object.release();
+}
+}
+
 void CCadSurfDoc::Serialize(CArchive& ar)
 {
-	if (ar.IsStoring())
-	{
-		// TODO: add storing code here
-		
-	}
-	else
-	{
-		// TODO: add loading code here		
-	}
+    try
+    {
+        if (ar.IsStoring())
+        {
+            const auto visible = dContext->ObjectsOfType(GLSTLMESH);
+            const auto hidden = dContext->ObjectsOfType(GLSTLMESH, true);
+            const auto count = visible.size() + hidden.size();
+            if (count > (std::numeric_limits<DWORD>::max)())
+                AfxThrowArchiveException(CArchiveException::badSchema);
+
+            const DWORD header[] = {LayoutVersion, static_cast<DWORD>(count)};
+            ar.Write(LayoutSignature, sizeof(LayoutSignature) - 1);
+            ar.Write(header, sizeof(header));
+            for (const CGLObject* object : visible)
+                WriteLayoutPart(ar, *static_cast<const CGLStlMesh*>(object), false);
+            for (const CGLObject* object : hidden)
+                WriteLayoutPart(ar, *static_cast<const CGLStlMesh*>(object), true);
+            return;
+        }
+
+        ULONGLONG remaining = ar.GetFile()->GetLength();
+        char signature[sizeof(LayoutSignature) - 1];
+        DWORD header[2];
+        ReadLayoutBytes(ar, remaining, signature, sizeof(signature));
+        ReadLayoutBytes(ar, remaining, header, sizeof(header));
+        if (std::memcmp(signature, LayoutSignature, sizeof(signature)) != 0 ||
+            header[0] != LayoutVersion || header[1] > remaining / MinimumPartSize)
+            AfxThrowArchiveException(CArchiveException::badSchema);
+
+        CGLDisplayContext loaded(this);
+        for (DWORD i = 0; i < header[1]; ++i)
+            ReadLayoutPart(ar, remaining, loaded);
+        if (remaining != 0)
+            AfxThrowArchiveException(CArchiveException::badSchema);
+
+        dContext->SwapObjects(loaded);
+        undoStack.clear();
+        redoStack.clear();
+    }
+    catch (const std::bad_alloc&)
+    {
+        AfxThrowMemoryException();
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -155,7 +282,7 @@ void CCadSurfDoc::OnImportStl()
 
         // Put every imported part on Z=0 and append it to the right of the
         // displayed STL row. STL files carry geometry but no assembly position.
-        const auto existing = dContext->DisplayedObjectsOfType(GLSTLMESH);
+        const auto existing = dContext->ObjectsOfType(GLSTLMESH);
         const CBoundingBox initial = object.GetBoundingBox();
         const double width = initial.XMax() - initial.XMin();
         const double depth = initial.YMax() - initial.YMin();

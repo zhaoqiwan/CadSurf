@@ -111,7 +111,7 @@ public:
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CCadSurfDoc)
 	public:
-	virtual BOOL OnNewDocument();
+	virtual void DeleteContents();
 	virtual void Serialize(CArchive& ar);
 	//}}AFX_VIRTUAL
 

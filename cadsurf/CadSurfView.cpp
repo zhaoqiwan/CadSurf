@@ -284,8 +284,14 @@ void CCadSurfView::OnInitialUpdate()
 {
 	CView::OnInitialUpdate();
 	SetTimer(1,1000,NULL);
-	// TODO: Add your specialized code here and/or call the base class
-	
+	CRect client;
+	GetClientRect(&client);
+	if (!GetDocument()->dContext->IsAllErased() && client.Width() > 0 && client.Height() > 0)
+	{
+		myView->MakeResource();
+		myView->ReSize(client.Width(), client.Height());
+		myView->FitAll();
+	}
 }
 
 void CCadSurfView::OnSize(UINT nType, int cx, int cy) 
@@ -655,8 +661,11 @@ void CCadSurfView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 
 void CCadSurfView::OnViewDisplayall() 
 {
-	// TODO: Add your command handler code here
-	GetDocument()->dContext->DisplayAll();
+	auto* doc = GetDocument();
+	if (!doc->dContext->ObjectsOfType(GLSTLMESH, true).empty())
+		doc->SetModifiedFlag();
+	doc->dContext->DisplayAll();
+	doc->UpdateAllViews(nullptr);
 }
 
 void CCadSurfView::OnUpdateViewDisplayall(CCmdUI* pCmdUI) 
@@ -667,8 +676,11 @@ void CCadSurfView::OnUpdateViewDisplayall(CCmdUI* pCmdUI)
 
 void CCadSurfView::OnViewEraseall() 
 {
-	// TODO: Add your command handler code here
-	GetDocument()->dContext->EraseAll();
+	auto* doc = GetDocument();
+	if (!doc->dContext->ObjectsOfType(GLSTLMESH).empty())
+		doc->SetModifiedFlag();
+	doc->dContext->EraseAll();
+	doc->UpdateAllViews(nullptr);
 }
 
 void CCadSurfView::OnUpdateViewEraseall(CCmdUI* pCmdUI) 
@@ -679,9 +691,11 @@ void CCadSurfView::OnUpdateViewEraseall(CCmdUI* pCmdUI)
 
 void CCadSurfView::OnViewDisplayselected() 
 {
-	// TODO: Add your command handler code here
-	CGLDisplayContext* ctx = GetDocument()->dContext;
-	ctx->DisplaySelected();
+	auto* doc = GetDocument();
+	if (doc->dContext->HasSelected() && !doc->dContext->ObjectsOfType(GLSTLMESH).empty())
+		doc->SetModifiedFlag();
+	doc->dContext->DisplaySelected();
+	doc->UpdateAllViews(nullptr);
 }
 
 void CCadSurfView::OnUpdateViewDisplayselected(CCmdUI* pCmdUI) 
@@ -693,9 +707,11 @@ void CCadSurfView::OnUpdateViewDisplayselected(CCmdUI* pCmdUI)
 
 void CCadSurfView::OnViewEraseselected() 
 {
-	// TODO: Add your command handler code here
-	CGLDisplayContext* ctx = GetDocument()->dContext;
-	ctx->EraseSelected();
+	auto* doc = GetDocument();
+	if (!SelectedStlIds().empty())
+		doc->SetModifiedFlag();
+	doc->dContext->EraseSelected();
+	doc->UpdateAllViews(nullptr);
 }
 
 void CCadSurfView::OnUpdateViewEraseselected(CCmdUI* pCmdUI) 
@@ -796,7 +812,12 @@ void CCadSurfView::OnPreferencesColor()
 		for(ctx->InitSelected(); ctx->MoreSelected(); ctx->NextSelected())
 		{
 			CGLObject* O = ctx->CurrentSelected();
-			O->SetColor(m_Red, m_Green, m_Blue);
+			if (O)
+			{
+				O->SetColor(m_Red, m_Green, m_Blue);
+				if (O->IsOfType(GLSTLMESH))
+					GetDocument()->SetModifiedFlag();
+			}
 		}
 		InvalidateRect(NULL, FALSE);
 		GetDocument()->UpdateAllViews(NULL);
@@ -1392,7 +1413,7 @@ void SetStlStatus(LPCTSTR text)
 
 void CCadSurfView::OnStlAutoArrange()
 {
-    const auto objects = GetDocument()->dContext->DisplayedObjectsOfType(GLSTLMESH);
+    const auto objects = GetDocument()->dContext->ObjectsOfType(GLSTLMESH);
     if (objects.empty())
         return;
 
@@ -1470,7 +1491,7 @@ void CCadSurfView::OnStlAutoArrange()
 
 void CCadSurfView::OnUpdateStlAutoArrange(CCmdUI* command)
 {
-    command->Enable(!GetDocument()->dContext->DisplayedObjectsOfType(GLSTLMESH).empty());
+    command->Enable(!GetDocument()->dContext->ObjectsOfType(GLSTLMESH).empty());
 }
 
 void CCadSurfView::OnStlViewX()
